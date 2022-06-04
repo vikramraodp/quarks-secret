@@ -39,7 +39,7 @@ serviceAccount:
 global:
   # certificate parameters
   # Need to push these values from cf-operator.tgz, to make it dynamic
-  certificate_expiry_days: 3600
+  certificate_expiry_days: 1096
   certificate_key_bits: 2048
   certificate_algorithm: rsa
 
