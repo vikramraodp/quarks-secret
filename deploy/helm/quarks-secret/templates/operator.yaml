@@ -24,6 +24,12 @@ spec:
           - quarks-secret
           imagePullPolicy: {{ .Values.global.image.pullPolicy | quote }}
           env:
+            - name: CERT_EXPIRY_DAYS
+              value: "{{ .Values.global.certificate_expiry_days }}"
+            - name: CERT_KEY_BITS
+              value: "{{ .Values.global.certificate_key_bits }}"
+            - name: CERT_ALGORITHM
+              value: "{{ .Values.global.certificate_algorithm }}"
             - name: APPLY_CRD
               value: "{{ .Values.applyCRD }}"
             - name: LOG_LEVEL

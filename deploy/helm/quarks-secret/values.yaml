@@ -37,6 +37,12 @@ serviceAccount:
   name:
 
 global:
+  # certificate parameters
+  # Need to push these values from cf-operator.tgz, to make it dynamic
+  certificate_expiry_days: 3600
+  certificate_key_bits: 2048
+  certificate_algorithm: rsa
+
   # contextTimeout is the timeout value for each K8's API request in seconds.
   contextTimeout: 30
   # MeltdownDuration is the duration (in seconds) of the meltdown period, in which we
