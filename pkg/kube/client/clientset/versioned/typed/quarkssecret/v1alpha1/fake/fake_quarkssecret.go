@@ -106,7 +106,7 @@ func (c *FakeQuarksSecrets) UpdateStatus(ctx context.Context, quarksSecret *v1al
 // Delete takes name of the quarksSecret and deletes it. Returns an error if one occurs.
 func (c *FakeQuarksSecrets) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewDeleteAction(quarkssecretsResource, c.ns, name), &v1alpha1.QuarksSecret{})
+		Invokes(testing.NewDeleteActionWithOptions(quarkssecretsResource, c.ns, name, opts), &v1alpha1.QuarksSecret{})
 
 	return err
 }

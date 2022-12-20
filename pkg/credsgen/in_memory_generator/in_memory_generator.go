@@ -2,8 +2,6 @@ package inmemorygenerator
 
 import (
 	"go.uber.org/zap"
-	"os"
-	"strconv"
 )
 
 // InMemoryGenerator represents a secret generator that generates everything
@@ -18,9 +16,5 @@ type InMemoryGenerator struct {
 
 // NewInMemoryGenerator creates a default InMemoryGenerator
 func NewInMemoryGenerator(log *zap.SugaredLogger) *InMemoryGenerator {
-	EXP,err := strconv.ParseUint(os.Getenv("CERT_EXPIRY_DAYS"), 10, 32)
-	_ = err
-	KEY_BITS,err2 := strconv.ParseUint(os.Getenv("CERT_KEY_BITS"), 10, 32)
-	_ = err2
-	return &InMemoryGenerator{Bits: int(KEY_BITS), Expiry: int(EXP), Algorithm: os.Getenv("CERT_ALGORITHM"), log: log}
+	return &InMemoryGenerator{Bits: 4096, Expiry: 1095, Algorithm: "rsa", log: log}
 }

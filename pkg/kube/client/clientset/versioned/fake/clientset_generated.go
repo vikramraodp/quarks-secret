@@ -63,7 +63,10 @@ func (c *Clientset) Tracker() testing.ObjectTracker {
 	return c.tracker
 }
 
-var _ clientset.Interface = &Clientset{}
+var (
+	_ clientset.Interface = &Clientset{}
+	_ testing.FakeClient  = &Clientset{}
+)
 
 // QuarkssecretV1alpha1 retrieves the QuarkssecretV1alpha1Client
 func (c *Clientset) QuarkssecretV1alpha1() quarkssecretv1alpha1.QuarkssecretV1alpha1Interface {

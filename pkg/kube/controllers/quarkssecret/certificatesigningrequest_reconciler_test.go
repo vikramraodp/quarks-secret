@@ -7,27 +7,28 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"go.uber.org/zap"
-	certv1 "k8s.io/api/certificates/v1beta1"
+	certv1 "k8s.io/api/certificates/v1"
 	corev1 "k8s.io/api/core/v1"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/apimachinery/pkg/types"
-	certv1clientfakes "k8s.io/client-go/kubernetes/typed/certificates/v1beta1/fake"
+	certv1clientfakes "k8s.io/client-go/kubernetes/typed/certificates/v1/fake"
 	ktesting "k8s.io/client-go/testing"
 	crc "sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
+
+	cfcfg "code.cloudfoundry.org/quarks-utils/pkg/config"
+	"code.cloudfoundry.org/quarks-utils/pkg/ctxlog"
+	"code.cloudfoundry.org/quarks-utils/pkg/names"
+	helper "code.cloudfoundry.org/quarks-utils/testing/testhelper"
 
 	qsv1a1 "code.cloudfoundry.org/quarks-secret/pkg/kube/apis/quarkssecret/v1alpha1"
 	"code.cloudfoundry.org/quarks-secret/pkg/kube/client/clientset/versioned/scheme"
 	"code.cloudfoundry.org/quarks-secret/pkg/kube/controllers"
 	cfakes "code.cloudfoundry.org/quarks-secret/pkg/kube/controllers/fakes"
 	escontroller "code.cloudfoundry.org/quarks-secret/pkg/kube/controllers/quarkssecret"
-	cfcfg "code.cloudfoundry.org/quarks-utils/pkg/config"
-	"code.cloudfoundry.org/quarks-utils/pkg/ctxlog"
-	"code.cloudfoundry.org/quarks-utils/pkg/names"
-	helper "code.cloudfoundry.org/quarks-utils/testing/testhelper"
 )
 
 var _ = Describe("ReconcileCertificateSigningRequest", func() {
@@ -39,7 +40,7 @@ var _ = Describe("ReconcileCertificateSigningRequest", func() {
 		log              *zap.SugaredLogger
 		config           *cfcfg.Config
 		client           *cfakes.FakeClient
-		certClient       *certv1clientfakes.FakeCertificatesV1beta1
+		certClient       *certv1clientfakes.FakeCertificatesV1
 		csr              *certv1.CertificateSigningRequest
 		privateKeySecret *corev1.Secret
 		qsec             *qsv1a1.QuarksSecret
@@ -111,7 +112,7 @@ var _ = Describe("ReconcileCertificateSigningRequest", func() {
 
 		manager.GetClientReturns(client)
 
-		certClient = &certv1clientfakes.FakeCertificatesV1beta1{
+		certClient = &certv1clientfakes.FakeCertificatesV1{
 			Fake: &ktesting.Fake{},
 		}
 	})

@@ -10,16 +10,17 @@ import (
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
 
-	_ "k8s.io/client-go/plugin/pkg/client/auth/oidc" // from https://github.com/kubernetes/client-go/issues/345
+	_ "k8s.io/client-go/plugin/pkg/client/auth"
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 	"sigs.k8s.io/controller-runtime/pkg/manager/signals"
 
-	"code.cloudfoundry.org/quarks-secret/pkg/kube/operator"
-	"code.cloudfoundry.org/quarks-secret/version"
 	"code.cloudfoundry.org/quarks-utils/pkg/cmd"
 	"code.cloudfoundry.org/quarks-utils/pkg/config"
 	"code.cloudfoundry.org/quarks-utils/pkg/ctxlog"
 	"code.cloudfoundry.org/quarks-utils/pkg/logger"
+
+	"code.cloudfoundry.org/quarks-secret/pkg/kube/operator"
+	"code.cloudfoundry.org/quarks-secret/version"
 )
 
 var log *zap.SugaredLogger

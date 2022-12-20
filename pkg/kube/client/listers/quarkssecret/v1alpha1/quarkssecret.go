@@ -15,8 +15,10 @@ import (
 )
 
 // QuarksSecretLister helps list QuarksSecrets.
+// All objects returned here must be treated as read-only.
 type QuarksSecretLister interface {
 	// List lists all QuarksSecrets in the indexer.
+	// Objects returned here must be treated as read-only.
 	List(selector labels.Selector) (ret []*v1alpha1.QuarksSecret, err error)
 	// QuarksSecrets returns an object that can list and get QuarksSecrets.
 	QuarksSecrets(namespace string) QuarksSecretNamespaceLister
@@ -47,10 +49,13 @@ func (s *quarksSecretLister) QuarksSecrets(namespace string) QuarksSecretNamespa
 }
 
 // QuarksSecretNamespaceLister helps list and get QuarksSecrets.
+// All objects returned here must be treated as read-only.
 type QuarksSecretNamespaceLister interface {
 	// List lists all QuarksSecrets in the indexer for a given namespace.
+	// Objects returned here must be treated as read-only.
 	List(selector labels.Selector) (ret []*v1alpha1.QuarksSecret, err error)
 	// Get retrieves the QuarksSecret from the indexer for a given namespace and name.
+	// Objects returned here must be treated as read-only.
 	Get(name string) (*v1alpha1.QuarksSecret, error)
 	QuarksSecretNamespaceListerExpansion
 }

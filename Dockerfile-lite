@@ -1,6 +1,6 @@
 ARG BASE_IMAGE=scratch
 
-FROM golang:1.15.8 AS build
+FROM golang:1.17.13 AS build
 ARG GOPROXY
 ENV GOPROXY $GOPROXY
 
